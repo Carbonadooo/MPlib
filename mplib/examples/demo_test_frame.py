@@ -63,9 +63,12 @@ class PlanningDemo(DemoSetup):
         """
         # target poses ankor
         poses = [
-            {"p": [0.4, 0.3, 0.12], "q": [1, 0, 0, 0]},
-            {"p": [0.2, -0.3, 0.08], "q": [0, 1, 0, 0]},
-            {"p": [0.6, 0.1, 0.14], "q": [0, 1, 0, 0]},
+            {"p": [0.6, 0.2, 0.3], "q": [0, 1, 0, 0]},
+            {"p": [0.2, 0.6, 0.3], "q": [0, 1, 0, 0]},
+            {"p": [0.2, 0.2, 0.6], "q": [0, 1, 0, 0]},
+            {"p": [0.2, 0.2, 0.6], "q": [1, 0, 0, 0]},
+            {"p": [0.2, 0.2, 0.6], "q": [0, 0, 1, 0]},
+            {"p": [0.2, 0.2, 0.6], "q": [0, 0, 0, 1]},
         ]
         # target poses ankor end
         # execute motion ankor
@@ -74,24 +77,10 @@ class PlanningDemo(DemoSetup):
             sapien_pose = sapien.Pose(pose_dict["p"], pose_dict["q"])
             self.move_to_pose(sapien_pose)
 
-        for i in range(3):
-            pose = poses[i]
-            pose["p"][2] += 0.2
+        for pose in poses:
             move_to_pose_dict(pose)
             self.open_gripper()
-            pose["p"][2] -= 0.12
-            move_to_pose_dict(pose)
             self.close_gripper()
-            pose["p"][2] += 0.12
-            move_to_pose_dict(pose)
-            pose["p"][0] += 0.1
-            move_to_pose_dict(pose)
-            pose["p"][2] -= 0.12
-            move_to_pose_dict(pose)
-            self.open_gripper()
-            pose["p"][2] += 0.12
-            move_to_pose_dict(pose)
-        # execute motion ankor end
 
 
 if __name__ == "__main__":
